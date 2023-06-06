@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "72687659403",
+    "project_id": "allstar-17cdf",
+    "storage_bucket": "allstar-17cdf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72687659403:android:4c903f2da5d01f76c9e78e",
+        "android_client_info": {
+          "package_name": "com.example.all_star"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDdb71Xa7vV5s6m3ektNoos1504tA9rYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72687659403:android:0893a504864001ccc9e78e",
+        "android_client_info": {
+          "package_name": "com.flutterlads.scrubr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDdb71Xa7vV5s6m3ektNoos1504tA9rYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

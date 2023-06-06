@@ -1,17 +1,22 @@
+import 'dart:developer';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../consts/consts.dart';
 
 enum Gender2 { service, business, housewife, student, other }
 
+// ignore: must_be_immutable
 class CustomCheckbox2 extends StatefulWidget {
   final Gender2? value;
-  final ValueChanged<Gender2?> onChanged;
+  TextEditingController controller = TextEditingController();
+  // final ValueChanged<Gender2?> onChanged;
 
-  const CustomCheckbox2({
+  CustomCheckbox2({
     super.key,
     this.value,
-    required this.onChanged,
+    required this.controller,
+    // required this.onChanged,
   });
 
   @override
@@ -40,8 +45,10 @@ class _CustomCheckbox2State extends State<CustomCheckbox2> {
               groupValue: _value,
               onChanged: (value) {
                 setState(() {
+                  widget.controller.text = 'Service';
+                  log(widget.controller.text.toString());
                   _value = value;
-                  widget.onChanged(_value);
+                  // widget.onChanged(_value);
                 });
               },
             ),
@@ -58,8 +65,9 @@ class _CustomCheckbox2State extends State<CustomCheckbox2> {
               groupValue: _value,
               onChanged: (value) {
                 setState(() {
+                  widget.controller.text = 'Business';
                   _value = value;
-                  widget.onChanged(_value);
+                  // widget.onChanged(_value);
                 });
               },
             ),
@@ -76,8 +84,9 @@ class _CustomCheckbox2State extends State<CustomCheckbox2> {
               groupValue: _value,
               onChanged: (value) {
                 setState(() {
+                  widget.controller.text = 'House Wife';
                   _value = value;
-                  widget.onChanged(_value);
+                  // widget.onChanged(_value);
                 });
               },
             ),
@@ -95,8 +104,9 @@ class _CustomCheckbox2State extends State<CustomCheckbox2> {
               groupValue: _value,
               onChanged: (value) {
                 setState(() {
+                  widget.controller.text = 'Student';
                   _value = value;
-                  widget.onChanged(_value);
+                  // widget.onChanged(_value);
                 });
               },
             ),
@@ -113,8 +123,9 @@ class _CustomCheckbox2State extends State<CustomCheckbox2> {
               groupValue: _value,
               onChanged: (value) {
                 setState(() {
+                  widget.controller.text = 'Others';
                   _value = value;
-                  widget.onChanged(_value);
+                  // widget.onChanged(_value);
                 });
               },
             ),

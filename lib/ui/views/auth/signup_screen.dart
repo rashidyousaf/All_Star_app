@@ -1,3 +1,4 @@
+import 'package:all_star/core/service/auth_service.dart';
 import 'package:all_star/ui/views/auth/components/auth_textfield.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,6 +13,11 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthService aS = AuthService();
+    // final sC = Provider.of<SignupController>(context);
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController confirmPasswordController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -69,22 +75,47 @@ class SignupScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AuthTextfield(title: emailAddress),
+                      AuthTextfield(
+                        title: emailAddress,
+                        controller: emailController,
+                      ),
                       SizedBox(
                         height: 20.h,
                       ),
-                      AuthTextfield(title: password),
+                      AuthTextfield(
+                        title: password,
+                        controller: passwordController,
+                      ),
                       SizedBox(
                         height: 20.h,
                       ),
-                      AuthTextfield(title: confirmPass),
+                      AuthTextfield(
+                        title: confirmPass,
+                        controller: confirmPasswordController,
+                      ),
                       SizedBox(
                         height: 50.h,
                       ),
                       AuthButton(
-                        title: signIn,
+                        title: signUp,
                         onTap: () {
-                          Navigator.pushNamed(context, '/otpNumberScreen');
+                          if (passwordController.text !=
+                                  confirmPasswordController.text &&
+                              passwordController.text.isNotEmpty &&
+                              confirmPasswordController.text.isNotEmpty &&
+                              emailController.text.isNotEmpty) {
+                            Utils().toastMessage('''Password don't match''');
+                          } else if (emailController.text.isEmpty ||
+                              passwordController.text.isEmpty ||
+                              confirmPasswordController.text.isEmpty) {
+                            Utils().toastMessage('''All fields required!''');
+                          } else {
+                            aS.creatUserWithEmailAndPassword(
+                                emailController.text,
+                                passwordController.text,
+                                context);
+                          }
+                          // Navigator.pushNamed(context, '/firstInfoScreen');
                         },
                       ),
                       SizedBox(

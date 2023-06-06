@@ -11,7 +11,8 @@ class SixthInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body:
+       Column(
 
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [

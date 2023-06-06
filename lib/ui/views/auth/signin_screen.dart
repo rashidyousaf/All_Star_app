@@ -107,9 +107,16 @@ class SigninScreen extends StatelessWidget {
                             donthaveanaccount,
                             style: myStyle(size: 16.sp),
                           ),
-                          Text(
-                            createAccount,
-                            style: myStyle(color: blueColor, size: 16.sp),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          GestureDetector(
+                            onTap: () =>
+                                Navigator.pushNamed(context, '/signupScreen'),
+                            child: Text(
+                              createAccount,
+                              style: myStyle(color: blueColor, size: 16.sp),
+                            ),
                           ),
                         ],
                       ),

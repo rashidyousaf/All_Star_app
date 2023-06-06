@@ -1,7 +1,10 @@
+import 'dart:developer';
+
+import 'package:all_star/core/controller/signup_controller.dart';
 import 'package:all_star/ui/widgets/custom_button.dart';
 import 'package:all_star/ui/widgets/custom_textfield.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:provider/provider.dart';
 import '../../../../consts/consts.dart';
 import '../../../../consts/strings.dart';
 import '../../../widgets/custom_appbar.dart';
@@ -11,6 +14,8 @@ class SeconInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sC = Provider.of<SignupController>(context);
+
     return Scaffold(
         body: Column(
       children: [
@@ -28,42 +33,49 @@ class SeconInfoScreen extends StatelessWidget {
                   ),
                   CustomTextfield(
                     title: passportNo,
+                    controller: sC.idNumberController,
                   ),
                   SizedBox(
                     height: 25.h,
                   ),
                   CustomTextfield(
                     title: applicantName,
+                    controller: sC.nameController,
                   ),
                   SizedBox(
                     height: 25.h,
                   ),
                   CustomTextfield(
                     title: applicantFatherName,
+                    controller: sC.fatherNameController,
                   ),
                   SizedBox(
                     height: 25.h,
                   ),
                   CustomTextfield(
                     title: applicantMotherName,
+                    controller: sC.motherNameController,
                   ),
                   SizedBox(
                     height: 25.h,
                   ),
                   CustomTextfield(
                     title: dateOfBirth,
+                    controller: sC.dateOfBirthController,
                   ),
                   SizedBox(
                     height: 25.h,
                   ),
                   CustomTextfield(
                     title: presentAddress,
+                    controller: sC.presentAddressController,
                   ),
                   SizedBox(
                     height: 25.h,
                   ),
                   CustomTextfield(
                     title: originAddress,
+                    controller: sC.originAddressController,
                   ),
                   SizedBox(
                     height: 50.h,

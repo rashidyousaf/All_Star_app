@@ -9,17 +9,27 @@ class OtpNumberScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //  final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
+    final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           SizedBox(
             height: 75.h,
           ),
-          Image.asset(
-            icOtp,
-            width: 223.w,
-            height: 233.h,
-          ),
+          if (!isKeyboard)
+            Image.asset(
+              icOtp,
+              width: 223.w,
+              height: 233.h,
+            ),
+          if (isKeyboard)
+            Image.asset(
+              icOtp,
+              width: 100.w,
+              height: 113.h,
+            ),
           SizedBox(
             height: 60.h,
           ),
@@ -45,7 +55,7 @@ class OtpNumberScreen extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 77.h,
+            height: 60.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +72,7 @@ class OtpNumberScreen extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 17.h,
+            height: 20.h,
           ),
           SizedBox(
             height: 60.h,

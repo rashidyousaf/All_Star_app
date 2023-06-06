@@ -1,8 +1,11 @@
 import 'package:all_star/consts/strings.dart';
 import 'package:all_star/ui/widgets/custom_button.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../consts/consts.dart';
+import '../../../../core/controller/signup_controller.dart';
 import '../../../widgets/custom_appbar.dart';
 
 class FifthInfoScreen extends StatelessWidget {
@@ -10,6 +13,7 @@ class FifthInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sC = Provider.of<SignupController>(context);
     return Scaffold(
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const CustomAppbar(
@@ -19,7 +23,9 @@ class FifthInfoScreen extends StatelessWidget {
           height: 42.h,
         ),
         Center(
-          child: Stack(children: [
+          child:
+              // this portion for profile image
+              Stack(children: [
             Image.asset(
               icProfileCircle,
               width: 97,
@@ -28,17 +34,21 @@ class FifthInfoScreen extends StatelessWidget {
             Positioned(
               top: 8.h,
               left: 2.w,
-              child: Container(
-                width: 78.w,
-                height: 78.h,
-                decoration: BoxDecoration(
-                  color: greyColor,
-                  borderRadius: BorderRadius.circular(50.r),
-                ),
-                child: Image.asset(
-                  icPerson,
-                  fit: BoxFit.fill,
-                ),
+              child: CachedNetworkImage(
+                imageUrl: sC.profileImgController.text,
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                imageBuilder: (context, imageProvider) {
+                  return Container(
+                    width: 78.w,
+                    height: 78.h,
+                    decoration: BoxDecoration(
+                        color: greyColor,
+                        borderRadius: BorderRadius.circular(50.r),
+                        image: DecorationImage(
+                            image: imageProvider, fit: BoxFit.fill)),
+                  );
+                },
               ),
             ),
           ]),
@@ -50,6 +60,7 @@ class FifthInfoScreen extends StatelessWidget {
           padding: EdgeInsets.only(left: 15.w, right: 15.w),
           child: Column(
             children: [
+              // this portion for id card picture, name and father name
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,8 +68,8 @@ class FifthInfoScreen extends StatelessWidget {
                   SizedBox(
                     width: 150.w,
                     height: 100.h,
-                    child: Image.asset(
-                      icidPic,
+                    child: Image.network(
+                      sC.frontIdImgController.text,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -78,25 +89,31 @@ class FifthInfoScreen extends StatelessWidget {
                       SizedBox(
                         height: 5.h,
                       ),
-                      Text(
-                        'Mashrafe Bin Mortaza',
-                        style: myStyle(size: 16.sp, weight: FontWeight.w500),
+                      SizedBox(
+                        width: 180.w,
+                        child: Text(
+                          sC.nameController.text,
+                          style: myStyle(size: 16.sp, weight: FontWeight.w500),
+                        ),
                       ),
                       SizedBox(
                         height: 11.h,
                       ),
-                      Text(
-                        fatherName,
-                        style: myStyle(
-                            size: 12.sp,
-                            color: greyColor,
-                            weight: FontWeight.w500),
+                      SizedBox(
+                        width: 180.w,
+                        child: Text(
+                          fatherName,
+                          style: myStyle(
+                              size: 12.sp,
+                              color: greyColor,
+                              weight: FontWeight.w500),
+                        ),
                       ),
                       SizedBox(
                         height: 5.h,
                       ),
                       Text(
-                        'Mashrafe Bin Mortaza',
+                        sC.fatherNameController.text,
                         style: myStyle(size: 16.sp, weight: FontWeight.w500),
                       ),
                     ],
@@ -106,6 +123,8 @@ class FifthInfoScreen extends StatelessWidget {
               SizedBox(
                 height: 30.h,
               ),
+
+              // this portion for persional details
               Container(
                 padding: EdgeInsets.only(top: 11.h, bottom: 11.h, left: 20.w),
                 width: double.maxFinite,
@@ -155,7 +174,7 @@ class FifthInfoScreen extends StatelessWidget {
                   SizedBox(
                     width: 60.w,
                     child: Text(
-                      male,
+                      sC.genderController.text,
                       style: myStyle(size: 16.sp, weight: FontWeight.w500),
                     ),
                   ),
@@ -203,7 +222,7 @@ class FifthInfoScreen extends StatelessWidget {
                   SizedBox(
                     width: 90.w,
                     child: Text(
-                      houseWife,
+                      sC.occupationController.text,
                       style: myStyle(size: 16.sp, weight: FontWeight.w500),
                     ),
                   ),
@@ -211,7 +230,7 @@ class FifthInfoScreen extends StatelessWidget {
                     width: 70.w,
                   ),
                   Text(
-                    '01855556252',
+                    sC.idNumberController.text,
                     style: myStyle(size: 16.sp, weight: FontWeight.w500),
                   ),
                 ],
@@ -239,7 +258,7 @@ class FifthInfoScreen extends StatelessWidget {
                 width: double.maxFinite,
                 height: 80.h,
                 child: Text(
-                  'ha akdj la dka flka fklafj aldfkj aflkaj flj',
+                  sC.presentAddressController.text,
                   style: myStyle(size: 16.sp, weight: FontWeight.w500),
                 ),
               ),
@@ -248,6 +267,7 @@ class FifthInfoScreen extends StatelessWidget {
         ),
         const Spacer(),
         Center(child: CustomButton(onTap: () {
+          sC.saveUserData();
           Navigator.pushNamed(context, '/sixthInfoScreen');
         })),
         SizedBox(

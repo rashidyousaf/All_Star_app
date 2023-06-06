@@ -1,17 +1,22 @@
+import 'dart:developer';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../consts/consts.dart';
 
 enum Gender { male, female, other }
 
+// ignore: must_be_immutable
 class CustomCheckbox extends StatefulWidget {
   final Gender? value;
-  final ValueChanged<Gender?> onChanged;
+  // final ValueChanged<Gender?> onChanged;
+  TextEditingController controller = TextEditingController();
 
-  const CustomCheckbox({
+  CustomCheckbox({
     super.key,
     this.value,
-    required this.onChanged,
+    // required this.onChanged,
+    required this.controller,
   });
 
   @override
@@ -39,7 +44,9 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
           onChanged: (value) {
             setState(() {
               _value = value;
-              widget.onChanged(_value);
+              // widget.onChanged(_value);
+              widget.controller.text = 'Male';
+              log(widget.controller.text.toString());
             });
           },
         ),
@@ -56,8 +63,10 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
           groupValue: _value,
           onChanged: (value) {
             setState(() {
+              widget.controller.text = 'Female';
+              log(widget.controller.text.toString());
               _value = value;
-              widget.onChanged(_value);
+              // widget.onChanged(_value);
             });
           },
         ),
@@ -74,8 +83,10 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
           groupValue: _value,
           onChanged: (value) {
             setState(() {
+              widget.controller.text = 'Other';
+              log(widget.controller.text.toString());
               _value = value;
-              widget.onChanged(_value);
+              // widget.onChanged(_value);
             });
           },
         ),
