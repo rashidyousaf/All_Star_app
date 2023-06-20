@@ -1,8 +1,8 @@
 import 'package:all_star/consts/consts.dart';
-import 'package:all_star/consts/strings.dart';
+import 'package:all_star/core/controller/signup_controller.dart';
+import 'package:all_star/core/service/auth_service.dart';
 import 'package:all_star/ui/views/auth/components/auth_textfield.dart';
 import 'package:all_star/ui/widgets/auth_button.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OtpNumberScreen extends StatelessWidget {
   const OtpNumberScreen({super.key});
@@ -11,6 +11,10 @@ class OtpNumberScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //  final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
     final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
+    AuthService aS = AuthService();
+    final sC = Provider.of<SignupController>(context);
+
+    final TextEditingController emailController = TextEditingController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -59,16 +63,20 @@ class OtpNumberScreen extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Icon(
-                Icons.phone_outlined,
+                Icons.email_outlined,
                 color: greyColor,
-                size: 25.sp,
+                size: 30.sp,
               ),
               SizedBox(
                 width: 5.w,
               ),
-              SizedBox(width: 290.w, child: AuthTextfield(title: mobileNumber)),
+              SizedBox(
+                  width: 290.w,
+                  child: AuthTextfield(
+                      controller: emailController, title: "Enter email")),
             ],
           ),
           SizedBox(
@@ -78,7 +86,17 @@ class OtpNumberScreen extends StatelessWidget {
             height: 60.h,
             width: 343.w,
             child: AuthButton(
-                onTap: () => Navigator.pushNamed(context, '/otpCodeScreen'),
+                loading: sC.isLoading,
+                onTap: () {
+                  sC.setIsLoading(true);
+                  if (emailController.text.isNotEmpty) {
+                    aS.recoverPassword(emailController.text, context);
+                    sC.setIsLoading(false);
+                  } else {
+                    sC.setIsLoading(false);
+                    Utils().toastMessage('Please enter email!');
+                  }
+                },
                 title: getOpt),
           ),
         ],

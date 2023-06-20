@@ -1,7 +1,4 @@
 import 'package:all_star/consts/consts.dart';
-import 'package:all_star/consts/strings.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'custom_messages_widget.dart';
 
 class MessagesScreen extends StatelessWidget {

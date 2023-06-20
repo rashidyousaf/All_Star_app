@@ -1,9 +1,10 @@
 import 'dart:developer';
 
 import 'package:all_star/consts/consts.dart';
-import 'package:all_star/consts/strings.dart';
+import 'package:all_star/core/service/firestore_service.dart';
 import 'package:all_star/ui/widgets/custom_button.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../bottom_nav_screen.dart';
 
 class UploadDocumentScreen extends StatefulWidget {
   const UploadDocumentScreen({super.key});
@@ -31,8 +32,11 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    FirestoreService fS = FirestoreService();
+    TextEditingController _controller = TextEditingController();
     log('values:$_selectedChoices');
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(children: [
         SizedBox(
           height: 30.h,
@@ -47,6 +51,7 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
             ),
           ),
         ),
+        // this section for provide information
         Text(
           'Provide Information',
           style:
@@ -55,6 +60,7 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
         SizedBox(
           height: 12.h,
         ),
+        // this section for we subtitle or text like we strongly give full freedom .....
         SizedBox(
           width: 270.w,
           child: Text(
@@ -66,13 +72,26 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
         SizedBox(
           height: 12.h,
         ),
+        // this section for container and textfield
         Container(
           width: 342.w,
           height: 142.h,
+          padding:
+              EdgeInsets.only(left: 15.w, right: 15.w, top: 5.h, bottom: 5.h),
           decoration: BoxDecoration(
               border: Border.all(width: 2.w, color: greyColor),
               borderRadius: BorderRadius.circular(30.r)),
-          child: const Center(child: Text('Write about you and your!')),
+          child: TextField(
+            controller: _controller,
+            maxLines: 10,
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: writerAboutYouAndYourEducation,
+                hintStyle: myStyle(
+                  size: 12.sp,
+                  weight: FontWeight.w300,
+                )),
+          ),
         ),
         SizedBox(
           height: 25.h,
@@ -94,6 +113,7 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
         SizedBox(
           height: 10.h,
         ),
+        // this section for choice chips
         SizedBox(
           height: 310.h,
           child: SingleChildScrollView(
@@ -155,7 +175,22 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
         SizedBox(
             width: 300.w,
             child: CustomButton(
-              onTap: () => Navigator.pushNamed(context, '/bottomNavScreen'),
+              onTap: () {
+                if (_selectedChoices.isNotEmpty ||
+                    _controller.text.isNotEmpty) {
+                  // fS.updateUserInfo(_selectedChoices, _controller.text);
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    '/bottomNavScreen',
+                    (_) => false, // Disable back button on the new route
+                    arguments: 1, // Set the initial index to 1
+                  );
+                } else {
+                  Utils().toastMessage(
+                      'Please select at least one item from the interests section',
+                      bgColor: redColor);
+                }
+              },
             ))
       ]),
     );

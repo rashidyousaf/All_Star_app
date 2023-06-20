@@ -63,4 +63,14 @@ class SignupController extends ChangeNotifier {
     occupationController.clear();
     profileImgController.clear();
   }
+
+  // this section for progress indecator on button
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  void setIsLoading(bool isLoading) {
+    _isLoading = isLoading;
+    notifyListeners();
+  }
 }

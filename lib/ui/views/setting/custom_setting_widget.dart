@@ -1,7 +1,4 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../consts/consts.dart';
-import '../../../consts/strings.dart';
 
 // ignore: must_be_immutable
 class CustomSettingWidget extends StatelessWidget {

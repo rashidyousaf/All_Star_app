@@ -1,7 +1,5 @@
 import 'package:all_star/consts/consts.dart';
-import 'package:all_star/consts/strings.dart';
 import 'package:all_star/ui/views/marriage_portal/marriage_home_screen/profile_details_widget.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MarriageHomeScreen extends StatelessWidget {
   const MarriageHomeScreen({super.key});

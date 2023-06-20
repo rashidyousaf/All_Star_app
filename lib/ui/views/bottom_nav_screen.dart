@@ -8,7 +8,8 @@ import '../../consts/colors.dart';
 import 'marriage_portal/marriage_splash/marriage_splash_screen.dart';
 
 class BottomNavScreen extends StatefulWidget {
-  const BottomNavScreen({super.key});
+  final int? initialIndex; // New constructor parameter
+  const BottomNavScreen({super.key, this.initialIndex});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -17,6 +18,16 @@ class BottomNavScreen extends StatefulWidget {
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
   int _selectedIndex = 0;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final int? initialIndex =
+        widget.initialIndex; // Access the initialIndex from the widget
+    setState(() {
+      _selectedIndex = initialIndex ?? 1;
+    });
+  }
 
   void _onItemTapped(int index) {
     if (index == 1) {

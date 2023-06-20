@@ -1,6 +1,4 @@
-import 'package:all_star/consts/strings.dart';
 import 'package:all_star/ui/widgets/custom_button.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../consts/consts.dart';
 import '../../../widgets/custom_appbar.dart';
@@ -11,8 +9,7 @@ class SixthInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-       Column(
+      body: Column(
 
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [

@@ -85,8 +85,10 @@ class Routes {
         return MaterialPageRoute(builder: (context) => const OtpNumberScreen());
       case "/otpCodeScreen":
         return MaterialPageRoute(builder: (context) => const OtpCodeScreen());
-      case "/bottomNavScreen":
-        return MaterialPageRoute(builder: (context) => const BottomNavScreen());
+      case '/bottomNavScreen':
+        final int? initialIndex = settings.arguments as int?;
+        return MaterialPageRoute(
+            builder: (context) => BottomNavScreen(initialIndex: initialIndex));
       // this section for marriage portal
       case "/uploadDocumentScreen":
         return MaterialPageRoute(

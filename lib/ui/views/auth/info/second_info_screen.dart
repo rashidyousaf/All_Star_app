@@ -1,12 +1,7 @@
-import 'dart:developer';
-
 import 'package:all_star/core/controller/signup_controller.dart';
 import 'package:all_star/ui/widgets/custom_button.dart';
 import 'package:all_star/ui/widgets/custom_textfield.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import '../../../../consts/consts.dart';
-import '../../../../consts/strings.dart';
 import '../../../widgets/custom_appbar.dart';
 
 class SeconInfoScreen extends StatelessWidget {

@@ -1,14 +1,13 @@
+import 'package:all_star/core/service/auth_service.dart';
 import 'package:all_star/ui/views/setting/custom_setting_widget.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../consts/consts.dart';
-import '../../../consts/strings.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthService aS = AuthService();
     return Scaffold(
         body: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,14 +86,16 @@ class SettingsScreen extends StatelessWidget {
                 title: helpCenter,
                 onTap: () => Navigator.pushNamed(context, '/helpScreen'),
               ),
-              // SizedBox(
-              //   height: 27.h,
-              // ),
-              // CustomSettingWidget(
-              //   icon: icTerms,
-              //   title: termsConditions,
-              //   onTap: () {},
-              // ),
+              SizedBox(
+                height: 27.h,
+              ),
+              CustomSettingWidget(
+                icon: icTerms,
+                title: "Sign Out",
+                onTap: () {
+                  aS.signOut(context);
+                },
+              ),
             ],
           ),
         ),

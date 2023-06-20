@@ -14,6 +14,8 @@ class UserModel {
   String? gender;
   String? occupation;
   String? profileImg;
+  List<dynamic>? interests;
+  String? about;
 
   UserModel({
     this.id,
@@ -31,6 +33,8 @@ class UserModel {
     this.gender,
     this.occupation,
     this.profileImg,
+    this.interests,
+    this.about,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -50,6 +54,8 @@ class UserModel {
       gender: json['gender'],
       occupation: json['occupation'],
       profileImg: json['profileImg'],
+      interests: json['interests'],
+      about: json['about'],
     );
   }
 
@@ -70,6 +76,8 @@ class UserModel {
       'gender': gender,
       'occupation': occupation,
       'profileImg': profileImg,
+      'interests': interests,
+      'about': about,
     };
   }
 }

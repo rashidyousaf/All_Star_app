@@ -1,10 +1,6 @@
 import 'package:all_star/consts/consts.dart';
-import 'package:all_star/consts/strings.dart';
 import 'package:all_star/core/controller/signup_controller.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
 import '../../../widgets/custom_appbar.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_image_picker.dart';

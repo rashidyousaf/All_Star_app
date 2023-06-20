@@ -1,9 +1,8 @@
 import 'package:all_star/core/service/auth_service.dart';
 import 'package:all_star/ui/views/auth/components/auth_textfield.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../consts/consts.dart';
-import '../../../consts/strings.dart';
+import '../../../core/controller/signup_controller.dart';
 import '../../widgets/auth_button.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -14,7 +13,7 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthService aS = AuthService();
-    // final sC = Provider.of<SignupController>(context);
+    final sC = Provider.of<SignupController>(context);
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     TextEditingController confirmPasswordController = TextEditingController();
@@ -96,30 +95,58 @@ class SignupScreen extends StatelessWidget {
                       SizedBox(
                         height: 50.h,
                       ),
+
+                      // signup booton
                       AuthButton(
+                        loading: sC.isLoading,
                         title: signUp,
                         onTap: () {
+                          sC.setIsLoading(true);
                           if (passwordController.text !=
                                   confirmPasswordController.text &&
                               passwordController.text.isNotEmpty &&
                               confirmPasswordController.text.isNotEmpty &&
                               emailController.text.isNotEmpty) {
                             Utils().toastMessage('''Password don't match''');
+                            sC.setIsLoading(false);
                           } else if (emailController.text.isEmpty ||
                               passwordController.text.isEmpty ||
                               confirmPasswordController.text.isEmpty) {
                             Utils().toastMessage('''All fields required!''');
+                            sC.setIsLoading(false);
                           } else {
                             aS.creatUserWithEmailAndPassword(
                                 emailController.text,
                                 passwordController.text,
                                 context);
+                            sC.setIsLoading(false);
                           }
                           // Navigator.pushNamed(context, '/firstInfoScreen');
                         },
                       ),
                       SizedBox(
                         height: 20.h,
+                      ),
+                      // have an account row
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Have an account?',
+                            style: myStyle(size: 16.sp),
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          GestureDetector(
+                            onTap: () =>
+                                Navigator.pushNamed(context, '/signinScreen'),
+                            child: Text(
+                              signIn,
+                              style: myStyle(color: blueColor, size: 16.sp),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

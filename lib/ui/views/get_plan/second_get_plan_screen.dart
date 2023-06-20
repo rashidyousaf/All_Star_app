@@ -1,10 +1,7 @@
 import 'package:all_star/consts/consts.dart';
-import 'package:all_star/consts/strings.dart';
 import 'package:all_star/ui/widgets/custom_button.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../widgets/custom_payment_TextField.dart';
-import 'components/first_get_plan_widget.dart';
 
 class SecondGetPlanScreen extends StatelessWidget {
   const SecondGetPlanScreen({super.key});

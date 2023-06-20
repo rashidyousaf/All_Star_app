@@ -1,7 +1,7 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:all_star/core/controller/signup_controller.dart';
 
 import '../../../consts/consts.dart';
-import '../../../consts/strings.dart';
+import '../../../core/service/auth_service.dart';
 import '../../widgets/auth_button.dart';
 
 class SigninScreen extends StatelessWidget {
@@ -11,6 +11,10 @@ class SigninScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthService aS = AuthService();
+    final sC = Provider.of<SignupController>(context);
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -63,6 +67,7 @@ class SigninScreen extends StatelessWidget {
                         style: myStyle(size: 28.sp, weight: FontWeight.w700),
                       ),
                       TextField(
+                        controller: emailController,
                         decoration: InputDecoration(
                           label: Text(
                             emailAddress,
@@ -74,6 +79,7 @@ class SigninScreen extends StatelessWidget {
                         height: 20.h,
                       ),
                       TextField(
+                        controller: passwordController,
                         decoration: InputDecoration(
                           label: Text(
                             emailAddress,
@@ -84,17 +90,31 @@ class SigninScreen extends StatelessWidget {
                       SizedBox(
                         height: 20.h,
                       ),
-                      Text(
-                        forgotPass,
-                        style: myStyle(color: blueColor, size: 16.sp),
+                      GestureDetector(
+                        onTap: () =>
+                            Navigator.pushNamed(context, '/otpNumberScreen'),
+                        child: Text(
+                          forgotPass,
+                          style: myStyle(color: blueColor, size: 16.sp),
+                        ),
                       ),
                       SizedBox(
                         height: 24.h,
                       ),
                       AuthButton(
+                        loading: sC.isLoading,
                         title: signIn,
                         onTap: () {
-                          Navigator.pushNamed(context, '/firstInfoScreen');
+                          sC.setIsLoading(true);
+                          if (emailController.text.isNotEmpty ||
+                              emailController.text.isNotEmpty) {
+                            aS.signInWithEmailAndPassword(emailController.text,
+                                passwordController.text, context);
+                            sC.setIsLoading(false);
+                          } else {
+                            Utils().toastMessage('All field requird');
+                            sC.setIsLoading(false);
+                          }
                         },
                       ),
                       SizedBox(

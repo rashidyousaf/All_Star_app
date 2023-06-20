@@ -1,7 +1,5 @@
 import 'package:all_star/consts/consts.dart';
-import 'package:all_star/consts/strings.dart';
 import 'package:all_star/ui/widgets/custom_button.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MarriageSplashScreen extends StatelessWidget {
   const MarriageSplashScreen({super.key});
@@ -30,7 +28,7 @@ class MarriageSplashScreen extends StatelessWidget {
           ),
           const Spacer(),
           CustomButton(
-            onTap: () => Navigator.pop(context),
+            onTap: () => Navigator.pushNamed(context, '/uploadDocumentScreen'),
             title: proceed,
           ),
           SizedBox(
