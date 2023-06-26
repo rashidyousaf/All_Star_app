@@ -25,24 +25,21 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     final int? initialIndex =
         widget.initialIndex; // Access the initialIndex from the widget
     setState(() {
-      _selectedIndex = initialIndex ?? 1;
+      _selectedIndex = initialIndex ?? 0;
     });
   }
+// this function for check where interest list empty then move to splash screen other wise index 1
 
+  List interestData = [];
   void _onItemTapped(int index) {
-    if (index == 1) {
+    if (index == 1 && interestData.isEmpty) {
       // Show splash screen
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => const MarriageSplashScreen(),
         ),
-      ).then((_) {
-        // Move to next tab when user taps on screen
-        setState(() {
-          _selectedIndex = 1;
-        });
-      });
+      );
     } else {
       setState(() {
         _selectedIndex = index;
@@ -62,11 +59,18 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           ),
           Offstage(
               offstage: _selectedIndex != 1, child: const MarriageHomeScreen()),
-          Offstage(offstage: _selectedIndex != 2, child: const ProfileScreen()),
+          Offstage(
+              offstage: _selectedIndex != 2,
+              child: ProfileScreen(
+                onDataReceived: (data) {
+                  interestData = data;
+                  // log('interest data: $data');
+                },
+              )),
         ],
       ),
       bottomNavigationBar: Container(
-        margin: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 35.h),
+        margin: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 20.h),
         height: 70.h, // set the height to 60 height units
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
@@ -75,8 +79,17 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           color: greenColor, // set the background color to green
         ),
         child: BottomNavigationBar(
+          elevation: 0,
           showSelectedLabels: false,
           showUnselectedLabels: false,
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          backgroundColor: Colors
+              .transparent, // set the background color of the BottomNavigationBar to transparent
+          selectedItemColor:
+              nblueColor, // set the color of the selected item to white
+          unselectedItemColor:
+              whiteColor, // set the color of the unselected items to grey
           items: [
             BottomNavigationBarItem(
               icon: Icon(
@@ -100,14 +113,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
               label: 'Favorites',
             ),
           ],
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          backgroundColor: Colors
-              .transparent, // set the background color of the BottomNavigationBar to transparent
-          selectedItemColor:
-              nblueColor, // set the color of the selected item to white
-          unselectedItemColor:
-              whiteColor, // set the color of the unselected items to grey
         ),
       ),
     );

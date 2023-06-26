@@ -4,6 +4,7 @@ export './images.dart';
 export './styles.dart';
 export './utlis.dart';
 export './strings.dart';
+export './list.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:provider/provider.dart';
 export 'package:flutter/material.dart';

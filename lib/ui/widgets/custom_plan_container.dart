@@ -1,5 +1,3 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../consts/consts.dart';
 
 // ignore: must_be_immutable

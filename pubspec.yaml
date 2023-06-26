@@ -24,31 +24,44 @@ environment:
 dependencies:
   # this package for multi selection of intersted thing
   chip_list: ^2.4.3+8
+  # this package for statemenagement
   provider: ^6.0.5
+  # this package for these all for firebase 
   firebase_core: ^2.13.0
-  cached_network_image: ^3.2.3
-  fluttertoast: ^8.2.2
   cloud_firestore: ^4.3.1
   firebase_auth: ^4.2.5
   flutter_lints: ^2.0.0
   firebase_storage: ^11.0.10
-
+  # this package for image download from internet and and show in show ui and store in cache  
+  cached_network_image: ^3.2.3
+  # this package for toast messag
+  fluttertoast: ^8.2.2
+# this package for responsive
+  flutter_screenutil: ^5.7.0
+  # this package for image picker from camera and gallery
+  image_picker: ^0.8.7+5
+   # this package for using google fonts in style
+  google_fonts: ^4.0.3
+  # this package for using pushnotification and message
+  firebase_messaging: ^14.6.3
+  flutter_local_notifications: ^14.1.1
+  
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  # this package for responsive
-  flutter_screenutil: ^5.7.0
+  
+
 dev_dependencies:
   
   
   
   
-  image_picker: ^0.8.7+5
+  
 
   
   flutter_test:
     sdk: flutter
-  google_fonts: ^4.0.3
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

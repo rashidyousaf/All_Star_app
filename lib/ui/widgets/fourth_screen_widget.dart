@@ -1,7 +1,4 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../consts/consts.dart';
-import '../../consts/strings.dart';
 
 class FourthScreenWidget extends StatelessWidget {
   const FourthScreenWidget({super.key, required this.num, required this.title});

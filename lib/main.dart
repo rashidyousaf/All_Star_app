@@ -1,4 +1,5 @@
 import 'package:all_star/core/controller/signup_controller.dart';
+import 'package:all_star/core/controller/update_document_controller.dart';
 import 'package:all_star/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => SignupController()),
+            ChangeNotifierProvider(create: (_) => UpdateDocumentController()),
           ],
           builder: (context, child) => MaterialApp(
             theme: ThemeData(

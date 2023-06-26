@@ -69,6 +69,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '72687659403',
     projectId: 'allstar-17cdf',
     storageBucket: 'allstar-17cdf.appspot.com',
-    iosBundleId: 'com.example.allStar',
+    iosBundleId: 'com.flutterlads.allStar',
   );
 }

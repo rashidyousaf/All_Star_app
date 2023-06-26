@@ -1,10 +1,26 @@
-import 'package:all_star/consts/consts.dart';
-import 'package:all_star/consts/strings.dart';
-import 'package:all_star/ui/widgets/auth_button.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:developer';
 
-class HomeScreen extends StatelessWidget {
+import 'package:all_star/consts/consts.dart';
+import 'package:all_star/core/service/firestore_service.dart';
+import 'package:all_star/ui/widgets/auth_button.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  FirestoreService fS = FirestoreService();
+  @override
+  void initState() {
+    fS.requestNotificationPermission();
+    fS.getDeviceToken().then((value) {
+      log('token: $value');
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
