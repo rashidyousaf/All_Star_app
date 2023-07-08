@@ -16,26 +16,31 @@ class UserModel {
   String? profileImg;
   List<dynamic>? interests;
   String? about;
+  String? deviceToken;
+  String? lastActive;
+  String? isOnline;
 
-  UserModel({
-    this.id,
-    this.email,
-    this.approve,
-    this.frontIdImg,
-    this.backIdImg,
-    this.idNumber,
-    this.name,
-    this.fatherName,
-    this.motherName,
-    this.dateOfBirth,
-    this.presentAddress,
-    this.originAddress,
-    this.gender,
-    this.occupation,
-    this.profileImg,
-    this.interests,
-    this.about,
-  });
+  UserModel(
+      {this.id,
+      this.email,
+      this.approve,
+      this.frontIdImg,
+      this.backIdImg,
+      this.idNumber,
+      this.name,
+      this.fatherName,
+      this.motherName,
+      this.dateOfBirth,
+      this.presentAddress,
+      this.originAddress,
+      this.gender,
+      this.occupation,
+      this.profileImg,
+      this.interests,
+      this.about,
+      this.deviceToken,
+      this.lastActive,
+      this.isOnline});
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
@@ -56,6 +61,9 @@ class UserModel {
       profileImg: json['profileImg'],
       interests: json['interests'],
       about: json['about'],
+      deviceToken: json['deviceToken'],
+      isOnline: json['is_online'] ?? '',
+      lastActive: json['last_active'] ?? '',
     );
   }
 
@@ -78,6 +86,9 @@ class UserModel {
       'profileImg': profileImg,
       'interests': interests,
       'about': about,
+      'deviceToken': deviceToken,
+      'is_online': isOnline,
+      'last_active': lastActive
     };
   }
 }

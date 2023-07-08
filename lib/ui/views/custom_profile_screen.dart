@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../../consts/consts.dart';
+import '../../core/controller/signup_controller.dart';
 import '../widgets/custom_appbar.dart';
+import '../widgets/custom_button.dart';
 
 class CustomProfileScreen extends StatelessWidget {
   final bool settingShow;
@@ -29,6 +31,7 @@ class CustomProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sC = Provider.of<SignupController>(context);
     return Scaffold(
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         // this section custom app
@@ -292,6 +295,13 @@ class CustomProfileScreen extends StatelessWidget {
                   style: myStyle(size: 16.sp, weight: FontWeight.w500),
                 ),
               ),
+
+              settingShow
+                  ? const SizedBox.shrink()
+                  : Center(child: CustomButton(onTap: () {
+                      sC.saveUserData();
+                      Navigator.pushNamed(context, '/sixthInfoScreen');
+                    }))
             ],
           ),
         ),

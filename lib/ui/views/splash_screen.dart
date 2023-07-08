@@ -1,7 +1,5 @@
 import 'package:all_star/consts/consts.dart';
-import 'package:all_star/consts/strings.dart';
 import 'package:all_star/ui/views/home_screen.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -6,10 +6,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../../consts/consts.dart';
+import '../model/message_model.dart';
 
 class FirestoreService {
   // this instance of firebase auth
-  final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
+  static final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
   CollectionReference userData =
       FirebaseFirestore.instance.collection('userData');
 
@@ -107,10 +108,51 @@ class FirestoreService {
       log('user denied permission');
     }
   }
+
 // this function geting device token
 
   Future<String> getDeviceToken() async {
     String? token = await messaging.getToken();
     return token!;
+  }
+  // userful for getting conversation id from to users ids
+
+  static String getConversationID(String id) =>
+      _firebaseAuth.currentUser!.uid.hashCode <= id.hashCode
+          ? '${_firebaseAuth.currentUser!.uid}_$id'
+          : '${id}_${_firebaseAuth.currentUser!.uid}';
+
+  // for getting all messages of a specific conversation from firestore database
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getAllMessages(String id) {
+    return FirebaseFirestore.instance
+        .collection('chats/${getConversationID(id)}/messages/')
+        .orderBy('send', descending: true)
+        .snapshots();
+  }
+
+  // for sending message
+  static Future<void> sendMessage(id, String msg) async {
+    // messing seding time (also used as id)
+
+    final time = DateTime.now().millisecondsSinceEpoch.toString();
+
+    // message to send
+    final MessageModel messageModel = MessageModel(
+      toId: id,
+      msg: msg,
+      read: '',
+      type: Type.text,
+      fromId: _firebaseAuth.currentUser?.uid ?? '',
+      send: time,
+    );
+
+    try {
+      final ref = FirebaseFirestore.instance
+          .collection('chats/${getConversationID(id)}/messages/');
+      await ref.doc(time).set(messageModel.toJson());
+    } catch (e) {
+      log('error sending message: $e');
+    }
   }
 }

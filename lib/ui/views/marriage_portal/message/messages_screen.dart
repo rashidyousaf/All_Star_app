@@ -46,7 +46,7 @@ class MessagesScreen extends StatelessWidget {
                 height: 30.h,
               ),
               GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, '/chatScreen'),
+                  // onTap: () => Navigator.pushNamed(context, '/chatScreen'),
                   child: const CustomMessagesWidget()),
               SizedBox(
                 height: 8.h,

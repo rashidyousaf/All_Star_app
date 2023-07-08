@@ -82,7 +82,7 @@ class SigninScreen extends StatelessWidget {
                         controller: passwordController,
                         decoration: InputDecoration(
                           label: Text(
-                            emailAddress,
+                            password,
                             style: myStyle(color: greyColor, size: 14.sp),
                           ),
                         ),

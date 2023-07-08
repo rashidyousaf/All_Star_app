@@ -22,26 +22,30 @@ class SignupController extends ChangeNotifier {
 
   FirestoreService fS = FirestoreService();
   AuthService aS = AuthService();
-
+  String? deviceToken;
   void saveUserData() async {
+    await fS.getDeviceToken().then((value) {
+      deviceToken = value;
+    });
     UserModel userModel = UserModel(
-        id: aS.getCurrentUserId(),
-        email: aS.getCurrentUserEmail(),
-        approve: false,
-        frontIdImg: frontIdImgController.text.trim(),
-        backIdImg: backIdImgController.text.trim(),
-        idNumber: idNumberController.text.trim(),
-        name: nameController.text.trim(),
-        fatherName: fatherNameController.text.trim(),
-        motherName: motherNameController.text.trim(),
-        dateOfBirth: dateOfBirthController.text.trim(),
-        presentAddress: presentAddressController.text.trim(),
-        originAddress: originAddressController.text.trim(),
-        gender: genderController.text.trim(),
-        occupation: occupationController.text.trim(),
-        profileImg: profileImgController.text.trim());
-
-    log("name: ${nameController.text.toString()}");
+      id: aS.getCurrentUserId(),
+      email: aS.getCurrentUserEmail(),
+      approve: false,
+      frontIdImg: frontIdImgController.text.trim(),
+      backIdImg: backIdImgController.text.trim(),
+      idNumber: idNumberController.text.trim(),
+      name: nameController.text.trim(),
+      fatherName: fatherNameController.text.trim(),
+      motherName: motherNameController.text.trim(),
+      dateOfBirth: dateOfBirthController.text.trim(),
+      presentAddress: presentAddressController.text.trim(),
+      originAddress: originAddressController.text.trim(),
+      gender: genderController.text.trim(),
+      occupation: occupationController.text.trim(),
+      profileImg: profileImgController.text.trim(),
+      deviceToken: deviceToken,
+    );
+    log('device token: $deviceToken');
     await fS.saveUserInfo(userModel);
     log('data save secussfully ');
     clearTextfield();

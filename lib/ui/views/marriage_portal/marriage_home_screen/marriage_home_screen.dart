@@ -87,7 +87,9 @@ class MarriageHomeScreen extends StatelessWidget {
                                     )),
                           ),
                           child: CachedNetworkImage(
-                              imageUrl: user.profileImg ?? '',
+                              imageUrl: user.profileImg != null
+                                  ? user.profileImg.toString()
+                                  : '',
                               placeholder: (context, index) =>
                                   Utils().progressIndecator(),
                               imageBuilder: (context, imageProvider) {

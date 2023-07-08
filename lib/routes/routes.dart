@@ -101,8 +101,7 @@ class Routes {
       case "/chatSplashScreen":
         return MaterialPageRoute(
             builder: (context) => const ChatSplashScreen());
-      case "/chatScreen":
-        return MaterialPageRoute(builder: (context) => const ChatScreen());
+
       case "/marriageProfileScreen":
         return MaterialPageRoute(
             builder: (context) => const MarriageProfileScreen());
